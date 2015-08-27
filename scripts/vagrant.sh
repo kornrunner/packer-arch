@@ -19,6 +19,7 @@ compinit
 promptinit
 EOF
 chown -R vagrant /home/vagrant/.zshrc
+printf "\nexport PATH=\"/home/vagrant/.composer/vendor/bin:\$PATH\"\n" | tee -a /home/vagrant/.zshrc
 
 # Customize the message of the day
-echo 'Development Environment' > /etc/motd
+echo 'Arch64 Devbox' > /etc/motd

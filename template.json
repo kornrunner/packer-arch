@@ -17,10 +17,18 @@
                 "scripts/pacman.sh",
                 "scripts/yaourt.sh",
                 "scripts/zsh.sh",
-                "scripts/tools.sh",
-                "scripts/git.sh",
-                "scripts/stat.sh",
                 "scripts/vagrant.sh",
+                "scripts/tools.sh",
+                "scripts/vcs.sh",
+                "scripts/nginx.sh",
+                "scripts/memcached.sh",
+                "scripts/redis.sh",
+                "scripts/supervisord.sh",
+                "scripts/nodejs.sh",
+                "scripts/php.sh",
+                "scripts/mailcatcher.sh",
+                "scripts/named.sh",
+                "scripts/stat.sh",
                 "scripts/cleanup.sh",
                 "scripts/zerodisk.sh"
             ],
@@ -66,6 +74,12 @@
                     "{{.Name}}",
                     "--cpus",
                     "2"
+                ],
+                [
+                    "modifyvm",
+                    "{{.Name}}",
+                    "--rtcuseutc",
+                    "on"
                 ]
             ]
         }
@@ -83,7 +97,7 @@
             "artifact_type": "vagrant.box",
             "metadata": {
                 "provider": "virtualbox",
-                "version": "0.0.2"
+                "version": "0.0.4"
             }
         }]
     ]
