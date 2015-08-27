@@ -14,7 +14,7 @@ Provisioned stuff:
 - scripts/redis.sh: `redis` + enable service
 - scripts/supervisord.sh: `supervisord`
 - scripts/nodejs.sh: `nodejs`, `npm`, `nodejs-bower`, `nodejs-gulp`
-- scripts/php.sh: `php`, `php-apcu`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-redis`, `composer` + enable `php-fpm` service
+- scripts/php.sh: `php`, `php-apcu`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-redis`, `php-mongo`, `composer` + enable `php-fpm` service
 - scripts/mailcatcher.sh: `ruby-mailcatcher`
 - scripts/named.sh: `bind`, `bind-tools` + enable `named` service
 - scripts/stat.sh: `lsof`, `iotop`, `libstatgrab`
