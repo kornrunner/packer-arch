@@ -1,0 +1,76 @@
+{
+    "push": {
+        "name": "kornrunner/arch",
+        "vcs": true
+    },
+    "variables": {
+        "atlas_username": "{{env `ATLAS_USERNAME`}}",
+        "atlas_name": "{{env `ATLAS_NAME`}}",
+        "iso_url": "https://mirrors.kernel.org/archlinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso",
+        "iso_checksum": "e98320cd5f0c346fff4140af0b5ffadd59849168",
+        "iso_checksum_type": "sha1"
+    },
+    "provisioners": [
+        {
+            "type": "shell",
+            "scripts": [
+                "scripts/pacman.sh",
+                "scripts/yaourt.sh",
+                "scripts/vagrant.sh",
+                "scripts/cleanup.sh",
+                "scripts/zerodisk.sh"
+            ],
+            "override": {
+                "virtualbox-iso": {
+                    "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
+                }
+            }
+        }
+    ],
+    "builders": [
+        {
+            "type": "virtualbox-iso",
+            "iso_url": "{{user `iso_url`}}",
+            "iso_checksum": "{{user `iso_checksum`}}",
+            "iso_checksum_type": "{{user `iso_checksum_type`}}",
+            "guest_os_type": "ArchLinux_64",
+            "guest_additions_mode": "disable",
+            "http_directory": ".",
+            "boot_wait": "5s",
+            "boot_command": [
+                "<enter><wait10><wait10>",
+                "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/scripts/virtualbox.sh<enter><wait5>",
+                "/usr/bin/bash ./virtualbox.sh<enter>"
+            ],
+            "disk_size": 20480,
+            "hard_drive_interface": "sata",
+            "ssh_username": "vagrant",
+            "ssh_password": "vagrant",
+            "ssh_wait_timeout": "10000s",
+            "headless": false,
+            "shutdown_command": "sudo poweroff",
+            "virtualbox_version_file": ".vbox_version",
+            "vboxmanage": [
+                [
+                    "modifyvm",
+                    "{{.Name}}",
+                    "--memory",
+                    "2048"
+                ],
+                [
+                    "modifyvm",
+                    "{{.Name}}",
+                    "--cpus",
+                    "2"
+                ]
+            ]
+        }
+    ],
+    "post-processors": [
+        {
+            "type": "vagrant",
+            "output": "packer_arch_{{.Provider}}.box",
+            "keep_input_artifact": false
+        }
+    ]
+}
