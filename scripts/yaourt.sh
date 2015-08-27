@@ -5,5 +5,5 @@ cat >> /etc/pacman.conf <<EOF
 SigLevel = Never
 Server = http://repo.archlinux.fr/\$arch
 EOF
-pacman -Sy --noconfirm yaourt
 
+/usr/bin/pacman -Sy --noconfirm yaourt

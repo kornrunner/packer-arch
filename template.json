@@ -16,6 +16,10 @@
             "scripts": [
                 "scripts/pacman.sh",
                 "scripts/yaourt.sh",
+                "scripts/zsh.sh",
+                "scripts/tools.sh",
+                "scripts/git.sh",
+                "scripts/stat.sh",
                 "scripts/vagrant.sh",
                 "scripts/cleanup.sh",
                 "scripts/zerodisk.sh"
@@ -47,10 +51,10 @@
             "ssh_username": "vagrant",
             "ssh_password": "vagrant",
             "ssh_wait_timeout": "10000s",
-            "headless": false,
+            "headless": true,
             "shutdown_command": "sudo poweroff",
             "virtualbox_version_file": ".vbox_version",
-            "vboxmanage": [
+            "vboxmanage_post": [
                 [
                     "modifyvm",
                     "{{.Name}}",
@@ -67,10 +71,20 @@
         }
     ],
     "post-processors": [
-        {
+        [{
             "type": "vagrant",
             "output": "packer_arch_{{.Provider}}.box",
             "keep_input_artifact": false
-        }
+        },
+        {
+            "type": "atlas",
+            "only": ["virtualbox-iso"],
+            "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
+            "artifact_type": "vagrant.box",
+            "metadata": {
+                "provider": "virtualbox",
+                "version": "0.0.2"
+            }
+        }]
     ]
 }

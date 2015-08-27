@@ -9,5 +9,16 @@ mkdir -pm 700 /home/vagrant/.ssh
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 chown -R vagrant /home/vagrant/.ssh
 
+# Set up oh-my-zsh
+chsh -s $(which zsh) vagrant
+cp /usr/share/oh-my-zsh/zshrc /home/vagrant/.zshrc
+/usr/bin/sed -i 's/plugins=(git)/plugins=(git git-extras git-flow)/g' /home/vagrant/.zshrc
+cat >> /home/vagrant/.zshrc <<EOF
+autoload -U compinit promptinit
+compinit
+promptinit
+EOF
+chown -R vagrant /home/vagrant/.zshrc
+
 # Customize the message of the day
 echo 'Development Environment' > /etc/motd
