@@ -14,7 +14,7 @@ Provisioned stuff:
 - scripts/redis.sh: `redis` + enable service
 - scripts/supervisord.sh: `supervisord`
 - scripts/nodejs.sh: `nodejs`, `npm`, `nodejs-bower`, `nodejs-gulp`
-- scripts/php.sh: `php`, `php-apcu`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-redis`, `php-mongo`, `composer` + enable `php-fpm` service
+- scripts/php.sh: `php`, `php-apcu`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-redis`, `php-mongo`, `php-phalcon`, `composer` + enable `php-fpm` service
 - scripts/mysql.sh: adds custom `kornrunner` repo, installs `mysql`, `mysql-clients`, `libmysqlclient`
 - scripts/mailcatcher.sh: `ruby-mailcatcher`
 - scripts/phantomjs.sh: `phantomjs`
