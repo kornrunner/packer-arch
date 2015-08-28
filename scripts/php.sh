@@ -26,5 +26,6 @@ echo 'extension=zip.so' > /etc/php/conf.d/zip.ini
 echo 'extension=soap.so' > /etc/php/conf.d/soap.ini
 echo 'extension=tidy.so' > /etc/php/conf.d/tidy.ini
 echo 'extension=pdo_mysql.so' > /etc/php/conf.d/pdo_mysql.ini
+echo 'zend_extension=opcache.so' > /etc/php/conf.d/zend_opcache.ini
 
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
