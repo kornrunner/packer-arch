@@ -2,8 +2,18 @@
 Packer.io template for `Arch Linux` (x86_64). Used to build [kornrunner/arch](https://atlas.hashicorp.com/kornrunner/boxes/arch)
 
 Base box for vagrant based on `archlinux-2015.08.01-dual.iso` intended for PHP development.
-Provisioned stuff:
 
+Shell and MySQL users:
+- `vagrant`/`vagrant`
+- `root`/`vagrant`
+
+Forwarded ports:
+- 4322 => 22
+- 8800 => 80
+- 8443 => 443
+- 43306 => 3306
+
+Provisioned stuff:
 - scripts/vcs.sh: `git`, `gitflow-git`, `subversion`
 - scripts/nginx.sh: `nginx` + enable service
 - scripts/memcached.sh: `memcached` + enable service
@@ -23,10 +33,64 @@ Provisioned stuff:
 - scripts/pacman.sh: adds custom `kornrunner` repo (required for mysql and php-uopz-git), uses `reflector` to sort mirrorlist
 - scripts/yaourt.sh: adds `archlinuxfr` repo and installs `yaourt` (AUR)
 
+PHP Modules
+```
+[PHP Modules]
+
+apc
+apcu
+Core
+ctype
+curl
+date
+dom
+ereg
+fileinfo
+filter
+gd
+gettext
+hash
+iconv
+imap
+json
+libxml
+mbstring
+mcrypt
+memcached
+mhash
+mongo
+mysqli
+mysqlnd
+openssl
+pcntl
+pcre
+PDO
+pdo_mysql
+phalcon
+Phar
+readline
+redis
+Reflection
+session
+SimpleXML
+soap
+SPL
+standard
+tidy
+tokenizer
+uopz
+xml
+xmlreader
+xmlwriter
+Zend OPcache
+zip
+zlib
+
+[Zend Modules]
+Zend OPcache
+uopz
+```
+
 Machine:
 - 2 CPU
 - 20GB HDD (single partition `ext4` `/`)
-
-Users:
-- `vagrant`/`vagrant`
-- `root`/`vagrant`
