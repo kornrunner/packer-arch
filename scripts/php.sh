@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-/usr/bin/runuser -l vagrant -c '/usr/bin/yaourt -S --noconfirm php php-apcu php-fpm php-gd php-imap php-mcrypt php-tidy php-memcached php-redis php-mongo php-phalcon'
+/usr/bin/runuser -l vagrant -c '/usr/bin/yaourt -S --noconfirm php php-apcu php-fpm php-gd php-imap php-mcrypt php-tidy php-memcached php-redis php-mongo php-phalcon php-uopz-git'
 sync
 /usr/bin/systemctl enable php-fpm.service
 
@@ -24,8 +24,10 @@ echo 'extension=mcrypt.so' > /etc/php/conf.d/mcrypt.ini
 echo 'extension=mysqli.so' > /etc/php/conf.d/mysqli.ini
 echo 'extension=zip.so' > /etc/php/conf.d/zip.ini
 echo 'extension=soap.so' > /etc/php/conf.d/soap.ini
+echo 'extension=phalcon.so' > /etc/php/conf.d/phalcon.ini
 echo 'extension=tidy.so' > /etc/php/conf.d/tidy.ini
 echo 'extension=pdo_mysql.so' > /etc/php/conf.d/pdo_mysql.ini
 echo 'zend_extension=opcache.so' > /etc/php/conf.d/zend_opcache.ini
+sed -i "s/;//" /etc/php/conf.d/uopz.ini
 
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
