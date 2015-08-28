@@ -26,6 +26,7 @@
                 "scripts/supervisord.sh",
                 "scripts/nodejs.sh",
                 "scripts/php.sh",
+                "scripts/mysql.sh",
                 "scripts/mailcatcher.sh",
                 "scripts/phantomjs.sh",
                 "scripts/named.sh",
@@ -98,7 +99,7 @@
             "artifact_type": "vagrant.box",
             "metadata": {
                 "provider": "virtualbox",
-                "version": "0.0.5"
+                "version": "0.0.6"
             }
         }]
     ]
