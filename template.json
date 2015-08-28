@@ -27,6 +27,7 @@
                 "scripts/nodejs.sh",
                 "scripts/php.sh",
                 "scripts/mailcatcher.sh",
+                "scripts/phantomjs.sh",
                 "scripts/named.sh",
                 "scripts/stat.sh",
                 "scripts/cleanup.sh",
