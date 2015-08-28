@@ -19,7 +19,26 @@ compinit
 promptinit
 EOF
 chown -R vagrant /home/vagrant/.zshrc
+
+# Composer
 printf "\nexport PATH=\"/home/vagrant/.composer/vendor/bin:\$PATH\"\n" | tee -a /home/vagrant/.zshrc
 
+# MySQL
+cat >> /home/vagrant/.my.cnf <<EOF
+[mysql]
+no-auto-rehash
+prompt="(\u@\h) [\d]> "
+EOF
+chown -R vagrant /home/vagrant/.my.cnf
+
+# git
+/usr/bin/runuser -l vagrant -c "git config --global alias.ci commit"
+/usr/bin/runuser -l vagrant -c "git config --global alias.co checkout"
+/usr/bin/runuser -l vagrant -c "git config --global alias.st status"
+/usr/bin/runuser -l vagrant -c "git config --global alias.desc describe"
+/usr/bin/runuser -l vagrant -c "git config --global alias.current-version 'describe --abbrev=0 --tags'"
+/usr/bin/runuser -l vagrant -c "git config --global alias.lg \"log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit\""
+/usr/bin/runuser -l vagrant -c "git config --global core.pager 'less -r'"
+
 # Customize the message of the day
-echo 'Arch64 Devbox' > /etc/motd
+echo 'Arch64 PHP Devbox' > /etc/motd
