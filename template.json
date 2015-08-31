@@ -30,6 +30,7 @@
                 "scripts/mailcatcher.sh",
                 "scripts/phantomjs.sh",
                 "scripts/named.sh",
+                "scripts/asd.sh",
                 "scripts/stat.sh",
                 "scripts/cleanup.sh",
                 "scripts/zerodisk.sh"
@@ -88,7 +89,7 @@
             "artifact_type": "vagrant.box",
             "metadata": {
                 "provider": "virtualbox",
-                "version": "0.0.7"
+                "version": "0.0.11"
             }
         }]
     ]

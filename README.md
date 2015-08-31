@@ -26,6 +26,7 @@ Provisioned stuff:
 - scripts/mailcatcher.sh: `ruby-mailcatcher`
 - scripts/phantomjs.sh: `phantomjs`
 - scripts/named.sh: `bind`, `bind-tools` + enable `named` service
+- scripts/asd.sh: `anything-sync-daemon`
 - scripts/tools.sh: `htop`, `ack`, `reptyr`, `colordiff`, `mc`, `pv`, `screen`, `gawk`
 - scripts/zsh.sh: installs `zsh`, `oh-my-zsh`
 - scripts/vagrant.sh: creates `vagrant` user, adds Vagrant key, changes shell to `zsh` + `oh-my-zsh`
