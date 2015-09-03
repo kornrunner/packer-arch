@@ -6,8 +6,8 @@
     "variables": {
         "atlas_username": "{{env `ATLAS_USERNAME`}}",
         "atlas_name": "{{env `ATLAS_NAME`}}",
-        "iso_url": "https://mirrors.kernel.org/archlinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso",
-        "iso_checksum": "e98320cd5f0c346fff4140af0b5ffadd59849168",
+        "iso_url": "https://mirrors.kernel.org/archlinux/iso/2015.09.01/archlinux-2015.09.01-dual.iso",
+        "iso_checksum": "4eb065d1b7639846703422a30c622eae0a558622",
         "iso_checksum_type": "sha1"
     },
     "provisioners": [
@@ -89,7 +89,7 @@
             "artifact_type": "vagrant.box",
             "metadata": {
                 "provider": "virtualbox",
-                "version": "0.0.11"
+                "version": "0.0.12"
             }
         }]
     ]

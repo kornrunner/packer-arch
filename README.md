@@ -1,7 +1,7 @@
 # packer-arch
 Packer.io template for `Arch Linux` (x86_64). Used to build [kornrunner/arch](https://atlas.hashicorp.com/kornrunner/boxes/arch)
 
-Base box for vagrant based on `archlinux-2015.08.01-dual.iso` intended for PHP development.
+Base box for vagrant based on `archlinux-2015.09.01-dual.iso` intended for PHP development.
 
 Shell and MySQL users:
 - `vagrant`/`vagrant`
