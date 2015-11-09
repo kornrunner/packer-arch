@@ -14,15 +14,15 @@ Forwarded ports:
 - 43306 => 3306
 
 Provisioned stuff:
-- scripts/vcs.sh: `git`, `gitflow-git`, `subversion`
+- scripts/vcs.sh: `git`, `gitflow-avh`, `subversion`
 - scripts/nginx.sh: `nginx` + enable service
 - scripts/memcached.sh: `memcached` + enable service
 - scripts/redis.sh: `redis` + enable service
 - scripts/mongo.sh: `mongodb`, `mongodb-tools` + enable service
 - scripts/supervisord.sh: `supervisord`
 - scripts/nodejs.sh: `nodejs`, `npm`, `nodejs-bower`, `nodejs-gulp`
-- scripts/php.sh: `php`, `php-apcu`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-redis`, `php-mongo`, `php-phalcon`, `php-uopz-git`, `composer` + enable `php-fpm` service, enable extensions
-- scripts/mysql.sh: installs `mysql`, `mysql-clients`, `libmysqlclient`
+- scripts/php.sh: `php`, `php-apcu`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-redis`, `php-mongo`, `php-phalcon`, `php-pecl`, `composer` + enable `php-fpm` service, enable extensions (mongodb and uopz installed via pecl)
+- scripts/mysql.sh: installs `mysql`, `mysql-clients`, `libmysqlclient` (5.7.9 GA)
 - scripts/mailcatcher.sh: `ruby-mailcatcher`
 - scripts/phantomjs.sh: `phantomjs`
 - scripts/named.sh: `bind`, `bind-tools` + enable `named` service
