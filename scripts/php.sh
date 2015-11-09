@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-/usr/bin/runuser -l vagrant -c '/usr/bin/yaourt -S --noconfirm php php-apcu php-fpm php-gd php-imap php-mcrypt php-tidy php-memcached php-redis php-mongo php-phalcon php-uopz-git'
+/usr/bin/runuser -l vagrant -c '/usr/bin/yaourt -S --noconfirm php php-apcu php-fpm php-gd php-imap php-mcrypt php-tidy php-memcached php-redis php-mongo php-phalcon php-pear'
+pecl install mongodb
+pecl install uopz-2.0.6 --ignore-errors
 sync
 /usr/bin/systemctl enable php-fpm.service
 
@@ -27,7 +29,11 @@ echo 'extension=soap.so' > /etc/php/conf.d/soap.ini
 echo 'extension=phalcon.so' > /etc/php/conf.d/phalcon.ini
 echo 'extension=tidy.so' > /etc/php/conf.d/tidy.ini
 echo 'extension=pdo_mysql.so' > /etc/php/conf.d/pdo_mysql.ini
+echo 'extension=mongodb.so' > /etc/php/conf.d/mongodb.ini
 echo 'zend_extension=opcache.so' > /etc/php/conf.d/zend_opcache.ini
-sed -i "s/;//" /etc/php/conf.d/uopz.ini
+cat > /etc/php/conf.d/uopz.ini <<- EOM
+zend_extension=uopz.so;
+uopz.overloads = 1
+EOM
 
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
