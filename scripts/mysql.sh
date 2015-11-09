@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-/usr/bin/pacman -Sy --noconfirm kornrunner/mysql kornrunner/mysql-clients kornrunner/libmysqlclient expect
+/usr/bin/pacman -Sy --noconfirm numactl kornrunner/mysql kornrunner/mysql-clients kornrunner/libmysqlclient expect
 sync
 
 sed '/\[mysqld\]/a collation-server = utf8_unicode_ci\
 character-set-server = utf8\
-character_set_client = utf8\
 skip_name_resolve\
 innodb_file_per_table\
 max_connections = 1024\
@@ -16,6 +15,7 @@ innodb_flush_method = O_DIRECT_NO_FSYNC\
 innodb_flush_log_at_trx_commit = 2\
 thread_cache_size = 4\
 bind-address = 0.0.0.0' -i /etc/mysql/my.cnf
+sed "s/sql_mode=/# sql_mode=/" -i /etc/mysql/my.cnf
 sync
 
 /usr/bin/mysql_install_db --user="mysql" --basedir=/usr --datadir=/var/lib/mysql
