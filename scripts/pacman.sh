@@ -13,14 +13,6 @@ fi
 # Upgrade Pacman DB
 /usr/bin/pacman-db-upgrade
 
-# Add konrunner repo (mysql, php-uopz)
-cat >> /etc/pacman.conf <<EOF
-
-[kornrunner]
-SigLevel = Never
-Server = http://kornrunner.net/archlinux
-EOF
-
 sync
 
 # Force pacman to refresh the package lists
