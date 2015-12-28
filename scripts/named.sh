@@ -4,4 +4,4 @@
 sync
 /usr/bin/systemctl enable named.service
 
-echo "nameserver 127.0.0.1" > /etc/resolv.conf.head
+mv /tmp/etc/resolv.conf.head /etc/resolv.conf.head
