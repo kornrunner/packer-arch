@@ -6,11 +6,18 @@
     "variables": {
         "atlas_username": "{{env `ATLAS_USERNAME`}}",
         "atlas_name": "{{env `ATLAS_NAME`}}",
-        "iso_url": "https://mirrors.kernel.org/archlinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso",
-        "iso_checksum": "e98320cd5f0c346fff4140af0b5ffadd59849168",
+		"memory": "1024",
+		"cpus": "2",
+        "iso_url": "https://mirrors.kernel.org/archlinux/iso/2015.12.01/archlinux-2015.12.01-dual.iso",
+        "iso_checksum": "7de3315b1384e5d2769eca13453e87a8d303050e",
         "iso_checksum_type": "sha1"
     },
     "provisioners": [
+		{
+			"type": "file",
+			"source": "./files/",
+			"destination": "/tmp"
+		},
         {
             "type": "shell",
             "scripts": [
@@ -26,7 +33,7 @@
                 "scripts/supervisord.sh",
                 "scripts/nodejs.sh",
                 "scripts/php.sh",
-                "scripts/mysql.sh",
+                "scripts/mariadb.sh",
                 "scripts/mailcatcher.sh",
                 "scripts/phantomjs.sh",
                 "scripts/named.sh",
@@ -65,14 +72,10 @@
             "headless": true,
             "shutdown_command": "sudo poweroff",
             "virtualbox_version_file": ".vbox_version",
-            "vboxmanage_post": [
-                ["modifyvm", "{{.Name}}", "--memory", "2048"],
-                ["modifyvm", "{{.Name}}", "--cpus", "2"],
-                ["modifyvm", "{{.Name}}", "--rtcuseutc", "on"],
-                ["modifyvm", "{{.Name}}", "--natpf1", "guest_ssh,tcp,,4322,,22"],
-                ["modifyvm", "{{.Name}}", "--natpf1", "guest_http,tcp,,8800,,80"],
-                ["modifyvm", "{{.Name}}", "--natpf1", "guest_https,tcp,,8443,,443"],
-                ["modifyvm", "{{.Name}}", "--natpf1", "guest_mysql,tcp,,43306,,3306"]
+            "vboxmanage": [
+                ["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
+                ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"],
+                ["modifyvm", "{{.Name}}", "--rtcuseutc", "on"]
             ]
         }
     ],
@@ -89,7 +92,7 @@
             "artifact_type": "vagrant.box",
             "metadata": {
                 "provider": "virtualbox",
-                "version": "0.0.11"
+                "version": "0.0.12"
             }
         }]
     ]
