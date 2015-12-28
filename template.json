@@ -1,99 +1,120 @@
 {
-    "push": {
-        "name": "kornrunner/arch",
-        "vcs": true
-    },
-    "variables": {
-        "atlas_username": "{{env `ATLAS_USERNAME`}}",
-        "atlas_name": "{{env `ATLAS_NAME`}}",
-		"memory": "1024",
-		"cpus": "2",
-        "iso_url": "https://mirrors.kernel.org/archlinux/iso/2015.12.01/archlinux-2015.12.01-dual.iso",
-        "iso_checksum": "7de3315b1384e5d2769eca13453e87a8d303050e",
-        "iso_checksum_type": "sha1"
-    },
-    "provisioners": [
-		{
-			"type": "file",
-			"source": "./files/",
-			"destination": "/tmp"
-		},
-        {
-            "type": "shell",
-            "scripts": [
-                "scripts/pacman.sh",
-                "scripts/yaourt.sh",
-                "scripts/zsh.sh",
-                "scripts/vagrant.sh",
-                "scripts/tools.sh",
-                "scripts/vcs.sh",
-                "scripts/nginx.sh",
-                "scripts/memcached.sh",
-                "scripts/redis.sh",
-                "scripts/supervisord.sh",
-                "scripts/nodejs.sh",
-                "scripts/php.sh",
-                "scripts/mariadb.sh",
-                "scripts/mailcatcher.sh",
-                "scripts/phantomjs.sh",
-                "scripts/named.sh",
-                "scripts/asd.sh",
-                "scripts/stat.sh",
-                "scripts/cleanup.sh",
-                "scripts/zerodisk.sh"
-            ],
-            "override": {
-                "virtualbox-iso": {
-                    "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
-                }
-            }
-        }
-    ],
-    "builders": [
-        {
-            "type": "virtualbox-iso",
-            "iso_url": "{{user `iso_url`}}",
-            "iso_checksum": "{{user `iso_checksum`}}",
-            "iso_checksum_type": "{{user `iso_checksum_type`}}",
-            "guest_os_type": "ArchLinux_64",
-            "guest_additions_mode": "disable",
-            "http_directory": ".",
-            "boot_wait": "5s",
-            "boot_command": [
-                "<enter><wait10><wait10>",
-                "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/scripts/virtualbox.sh<enter><wait5>",
-                "/usr/bin/bash ./virtualbox.sh<enter>"
-            ],
-            "disk_size": 20480,
-            "hard_drive_interface": "sata",
-            "ssh_username": "vagrant",
-            "ssh_password": "vagrant",
-            "ssh_wait_timeout": "10000s",
-            "headless": true,
-            "shutdown_command": "sudo poweroff",
-            "virtualbox_version_file": ".vbox_version",
-            "vboxmanage": [
-                ["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
-                ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"],
-                ["modifyvm", "{{.Name}}", "--rtcuseutc", "on"]
-            ]
-        }
-    ],
-    "post-processors": [
-        [{
-            "type": "vagrant",
-            "output": "packer_arch_{{.Provider}}.box",
-            "keep_input_artifact": false
+  "builders": [
+    {
+      "boot_command": [
+        "<enter><wait10><wait10>",
+        "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/scripts/virtualbox.sh<enter><wait5>",
+        "/usr/bin/bash ./virtualbox.sh<enter>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": 20480,
+      "guest_additions_mode": "disable",
+      "guest_os_type": "ArchLinux_64",
+      "hard_drive_interface": "sata",
+      "headless": true,
+      "http_directory": ".",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_url": "{{user `iso_url`}}",
+      "shutdown_command": "sudo poweroff",
+      "ssh_password": "vagrant",
+      "ssh_username": "vagrant",
+      "ssh_wait_timeout": "10000s",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "{{user `memory`}}"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "{{user `cpus`}}"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--rtcuseutc",
+          "on"
+        ]
+      ],
+      "virtualbox_version_file": ".vbox_version"
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "keep_input_artifact": false,
+        "output": "packer_arch_{{.Provider}}.box",
+        "type": "vagrant"
+      },
+      {
+        "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+          "provider": "virtualbox",
+          "version": "{{user `version`}}"
         },
-        {
-            "type": "atlas",
-            "only": ["virtualbox-iso"],
-            "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
-            "artifact_type": "vagrant.box",
-            "metadata": {
-                "provider": "virtualbox",
-                "version": "0.0.15"
-            }
-        }]
+        "only": [
+          "virtualbox-iso"
+        ],
+        "type": "atlas"
+      }
     ]
+  ],
+  "provisioners": [
+    {
+      "destination": "/tmp",
+      "source": "./files/",
+      "type": "file"
+    },
+    {
+      "override": {
+        "virtualbox-iso": {
+          "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
+        }
+      },
+      "scripts": [
+        "scripts/pacman.sh",
+        "scripts/yaourt.sh",
+        "scripts/zsh.sh",
+        "scripts/vagrant.sh",
+        "scripts/tools.sh",
+        "scripts/vcs.sh",
+        "scripts/nginx.sh",
+        "scripts/memcached.sh",
+        "scripts/redis.sh",
+        "scripts/supervisord.sh",
+        "scripts/nodejs.sh",
+        "scripts/php.sh",
+        "scripts/mariadb.sh",
+        "scripts/mailcatcher.sh",
+        "scripts/phantomjs.sh",
+        "scripts/named.sh",
+        "scripts/asd.sh",
+        "scripts/stat.sh",
+        "scripts/cleanup.sh",
+        "scripts/zerodisk.sh"
+      ],
+      "type": "shell"
+    }
+  ],
+  "push": {
+    "name": "kornrunner/arch",
+    "vcs": true
+  },
+  "variables": {
+    "atlas_name": "{{env `ATLAS_NAME`}}",
+    "atlas_username": "{{env `ATLAS_USERNAME`}}",
+    "version": "{{env `ATLAS_BUILD_CONFIGURATION_VERSION`}}",
+    "cpus": "1",
+    "iso_checksum": "7de3315b1384e5d2769eca13453e87a8d303050e",
+    "iso_checksum_type": "sha1",
+    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2015.12.01/archlinux-2015.12.01-dual.iso",
+    "memory": "1024"
+  }
 }
+
