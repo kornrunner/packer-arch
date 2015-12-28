@@ -24,11 +24,7 @@ chown -R vagrant /home/vagrant/.zshrc
 printf "\nexport PATH=\"/home/vagrant/.composer/vendor/bin:\$PATH\"\n" | tee -a /home/vagrant/.zshrc
 
 # MySQL
-cat >> /home/vagrant/.my.cnf <<EOF
-[mysql]
-no-auto-rehash
-prompt="(\u@\h) [\d]> "
-EOF
+mv /tmp/home/vagrant/.my.cnf /home/vagrant/.my.cnf
 chown -R vagrant /home/vagrant/.my.cnf
 
 # git
@@ -41,4 +37,4 @@ chown -R vagrant /home/vagrant/.my.cnf
 /usr/bin/runuser -l vagrant -c "git config --global core.pager 'less -r'"
 
 # Customize the message of the day
-echo 'Arch64 PHP Devbox' > /etc/motd
+mv /tmp/etc/motd /etc/motd
