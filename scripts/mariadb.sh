@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-/usr/bin/pacman -Sy --noconfirm kornrunner/mysql kornrunner/mysql-clients kornrunner/libmysqlclient expect
+/usr/bin/pacman -Sy --noconfirm mariadb mariadb-clients libmariadbclient expect
 sync
 
 sed '/\[mysqld\]/a collation-server = utf8_unicode_ci\
@@ -25,28 +25,29 @@ sync
 /usr/bin/systemctl start mysqld.service
 sync
 
-SECURE_MYSQL=$(expect -c "
-set timeout 10
-spawn /usr/bin/mysql_secure_installation
-expect \"Enter current password for root (enter for none): \"
-send \"\r\"
-expect \"Set root password*\"
-send \"y\r\"
-expect \"New password:*\"
-send \"vagrant\r\"
-expect \"Re-enter new password:*\"
-send \"vagrant\r\"
-expect \"Remove anonymous users*\"
-send \"y\r\"
-expect \"Disallow root login remotely*\"
-send \"y\r\"
-expect \"Remove test database and access to it*\"
-send \"y\r\"
-expect \"Reload privilege tables now*\"
-send \"y\r\"
-expect eof
-")
-echo "$SECURE_MYSQL"
+#SECURE_MYSQL=$(expect -c "
+#set timeout 10
+#spawn /usr/bin/mysql_secure_installation
+#expect \"Enter current password for root (enter for none): \"
+#send \"\r\"
+#expect \"Set root password*\"
+#send \"y\r\"
+#expect \"New password:*\"
+#send \"vagrant\r\"
+#expect \"Re-enter new password:*\"
+#send \"vagrant\r\"
+#expect \"Remove anonymous users*\"
+#send \"y\r\"
+#expect \"Disallow root login remotely*\"
+#send \"y\r\"
+#expect \"Remove test database and access to it*\"
+#send \"y\r\"
+#expect \"Reload privilege tables now*\"
+#send \"y\r\"
+#expect eof
+#")
+#echo "$SECURE_MYSQL"
+expect < /tmp/mariadb.exp
 sync
 
 mysql --user="root" --password="vagrant" -e "GRANT ALL ON *.* TO root@'0.0.0.0' IDENTIFIED BY 'vagrant' WITH GRANT OPTION;"
