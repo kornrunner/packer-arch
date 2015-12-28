@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
-/usr/bin/runuser -l vagrant -c '/usr/bin/yaourt -S --noconfirm php php-apcu php-fpm php-gd php-imap php-mcrypt php-tidy php-memcached php-redis php-mongo php-phalcon php-uopz-git'
+/usr/bin/runuser -l vagrant -c '/usr/bin/yaourt -S --noconfirm php php-apcu php-fpm php-gd php-imap php-mcrypt php-tidy php-memcached php-pear php-phalcon'
 sync
+
+mv /tmp/etc/php/conf.d/phar.ini /etc/php/conf.d/phar.ini
+mv /tmp/etc/php/conf.d/openssl.ini /etc/php/conf.d/openssl.ini
+
+/usr/bin/pecl channel-update pecl.php.net
+/usr/bin/pecl install mongodb
+/usr/bin/pecl install redis
+/usr/bin/pecl install uopz-2.0.6
 /usr/bin/systemctl enable php-fpm.service
 
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/php.ini
@@ -14,20 +22,6 @@ sed -i "s/open_basedir =/;open_basedir =/" /etc/php/php.ini
 # Extensions
 sed -i "s/;//" /etc/php/conf.d/apcu.ini
 sed -i "s/;//" /etc/php/conf.d/memcached.ini
-sed -i "s/;//" /etc/php/conf.d/redis.ini
-echo 'extension=openssl.so' > /etc/php/conf.d/openssl.ini
-echo 'extension=phar.so' > /etc/php/conf.d/phar.ini
-echo 'extension=gd.so' > /etc/php/conf.d/gd.ini
-echo 'extension=iconv.so' > /etc/php/conf.d/iconv.ini
-echo 'extension=imap.so' > /etc/php/conf.d/imap.ini
-echo 'extension=mcrypt.so' > /etc/php/conf.d/mcrypt.ini
-echo 'extension=mysqli.so' > /etc/php/conf.d/mysqli.ini
-echo 'extension=zip.so' > /etc/php/conf.d/zip.ini
-echo 'extension=soap.so' > /etc/php/conf.d/soap.ini
-echo 'extension=phalcon.so' > /etc/php/conf.d/phalcon.ini
-echo 'extension=tidy.so' > /etc/php/conf.d/tidy.ini
-echo 'extension=pdo_mysql.so' > /etc/php/conf.d/pdo_mysql.ini
-echo 'zend_extension=opcache.so' > /etc/php/conf.d/zend_opcache.ini
-sed -i "s/;//" /etc/php/conf.d/uopz.ini
+mv /tmp/etc/php/conf.d/*.ini /etc/php/conf.d/
 
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
