@@ -111,9 +111,9 @@
     "atlas_username": "{{env `ATLAS_USERNAME`}}",
     "version": "{{env `ATLAS_BUILD_CONFIGURATION_VERSION`}}",
     "cpus": "1",
-    "iso_checksum": "7de3315b1384e5d2769eca13453e87a8d303050e",
+    "iso_checksum": "992f046c3fb5afecaf8734126f2a095f437ca9b8",
     "iso_checksum_type": "sha1",
-    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2015.12.01/archlinux-2015.12.01-dual.iso",
+    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2016.03.01/archlinux-2016.03.01-dual.iso",
     "memory": "1024"
   }
 }
