@@ -32,7 +32,7 @@ colormsg "==> setting ${DISK} bootable"
 /usr/bin/sgdisk ${DISK} --attributes=1:set:2
 
 colormsg "==> creating /root filesystem (ext4)"
-/usr/bin/mkfs.ext4 -m 0 -F -L root ${ROOT_PARTITION}
+/usr/bin/mkfs.ext4 -m 0 -F -L root -O ^64bit ${ROOT_PARTITION}
 
 colormsg "==> mounting ${ROOT_PARTITION} to ${TARGET_DIR}"
 /usr/bin/mount -o noatime,errors=remount-ro ${ROOT_PARTITION} ${TARGET_DIR}
@@ -52,7 +52,7 @@ colormsg "==> generating the system configuration script"
 
 cat <<-EOF > "${TARGET_DIR}${CONFIG_SCRIPT}"
 	echo '${FQDN}' > /etc/hostname
-	/usr/bin/ln -s /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
+	/usr/bin/ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
 	/usr/bin/hwclock --systohc --utc
 	echo 'KEYMAP=${KEYMAP}' > /etc/vconsole.conf
 	/usr/bin/sed -i 's/#${LANGUAGE}/${LANGUAGE}/' /etc/locale.gen
@@ -66,10 +66,11 @@ cat <<-EOF > "${TARGET_DIR}${CONFIG_SCRIPT}"
 	/usr/bin/ln -s '/usr/lib/systemd/system/dhcpcd@.service' '/etc/systemd/system/multi-user.target.wants/dhcpcd@eth0.service'
 	/usr/bin/sed -i 's/#UseDNS yes/UseDNS no/g' /etc/ssh/sshd_config
 	/usr/bin/sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+	echo "GSSAPIAuthentication no" >> /etc/ssh/sshd_config
 	/usr/bin/systemctl enable sshd.service
 
 	# VirtualBox Guest Additions
-	/usr/bin/pacman -S --noconfirm linux-headers virtualbox-guest-modules virtualbox-guest-utils virtualbox-guest-dkms nfs-utils
+	/usr/bin/pacman -S --noconfirm linux-headers virtualbox-guest-utils virtualbox-guest-dkms nfs-utils
 	echo -e 'vboxguest\nvboxsf\nvboxvideo' > /etc/modules-load.d/virtualbox.conf
 	guest_version=\$(/usr/bin/pacman -Q virtualbox-guest-dkms | awk '{ print \$2 }' | cut -d'-' -f1)
 	kernel_version="\$(/usr/bin/pacman -Q linux | awk '{ print \$2 }')-ARCH"
@@ -79,11 +80,14 @@ cat <<-EOF > "${TARGET_DIR}${CONFIG_SCRIPT}"
 	/usr/bin/systemctl enable rpcbind.service
 
 	# Vagrant-specific configuration
-	/usr/bin/groupadd vagrant
-	/usr/bin/useradd --password ${PASSWORD} --comment 'Vagrant User' --create-home --gid users --groups vagrant,vboxsf vagrant
+	/usr/bin/useradd --password ${PASSWORD} --comment 'Vagrant User' --create-home --user-group vagrant
 	echo 'Defaults env_keep += "SSH_AUTH_SOCK"' > /etc/sudoers.d/10_vagrant
 	echo 'vagrant ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers.d/10_vagrant
 	/usr/bin/chmod 0440 /etc/sudoers.d/10_vagrant
+	/usr/bin/install --directory --owner=vagrant --group=vagrant --mode=0700 /home/vagrant/.ssh
+	/usr/bin/curl --output /home/vagrant/.ssh/authorized_keys --location https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub
+	/usr/bin/chown vagrant:vagrant /home/vagrant/.ssh/authorized_keys
+	/usr/bin/chmod 0600 /home/vagrant/.ssh/authorized_keys
 EOF
 
 colormsg "==> entering chroot and configuring system"

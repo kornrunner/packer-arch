@@ -1,5 +1,6 @@
 # Cache objects
 packer_cache/
+nbproject/
 
 # For built boxes
 *.box

@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
-/usr/bin/runuser -l vagrant -c '/usr/bin/yaourt -S --noconfirm php php-apcu php-fpm php-gd php-imap php-mcrypt php-tidy php-memcached php-pear php-phalcon'
-sync
+fallocate -l 2G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
 
-mv /tmp/etc/php/conf.d/phar.ini /etc/php/conf.d/phar.ini
-mv /tmp/etc/php/conf.d/openssl.ini /etc/php/conf.d/openssl.ini
+/usr/bin/runuser -l vagrant -c '/usr/bin/yaourt -S --noconfirm php php-apcu php-apcu-bc php-fpm php-gd php-imap php-mcrypt php-tidy php-memcached php-pear php-phalcon php-uopz-git'
+sync
 
 /usr/bin/pecl channel-update pecl.php.net
 /usr/bin/pecl install mongodb
 /usr/bin/pecl install redis
-/usr/bin/pecl install uopz-2.0.6
 /usr/bin/systemctl enable php-fpm.service
 
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/php.ini
@@ -25,3 +26,6 @@ sed -i "s/;//" /etc/php/conf.d/memcached.ini
 mv /tmp/etc/php/conf.d/*.ini /etc/php/conf.d/
 
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+swapoff /swapfile
+rm /swapfile

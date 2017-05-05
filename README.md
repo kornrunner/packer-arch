@@ -15,9 +15,8 @@ Provisioned stuff:
 - scripts/mongo.sh: `mongodb`, `mongodb-tools` + enable service
 - scripts/supervisord.sh: `supervisord`
 - scripts/nodejs.sh: `nodejs`, `npm`, `bower`, `gulp`, `browserify`
-- scripts/php.sh: `php`, `php-apcu`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-phalcon`, `composer` + enable `php-fpm` service, enable extensions
+- scripts/php.sh: `php`, `php-apcu`, `php-apcu-bc`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-phalcon`, `composer` + enable `php-fpm` service, enable extensions
 - scripts/mysql.sh: installs `mariadb`, `mariadb-clients`, `libmariadbclient`
-- scripts/mailcatcher.sh: `ruby-mailcatcher`
 - scripts/phantomjs.sh: `phantomjs`
 - scripts/named.sh: `bind`, `bind-tools` + enable `named` service
 - scripts/asd.sh: `anything-sync-daemon`
