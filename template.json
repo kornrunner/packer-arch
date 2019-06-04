@@ -91,7 +91,6 @@
         "scripts/nodejs.sh",
         "scripts/php.sh",
         "scripts/mariadb.sh",
-        "scripts/mailcatcher.sh",
         "scripts/phantomjs.sh",
         "scripts/named.sh",
         "scripts/asd.sh",
@@ -111,9 +110,9 @@
     "atlas_username": "{{env `ATLAS_USERNAME`}}",
     "version": "{{env `ATLAS_BUILD_CONFIGURATION_VERSION`}}",
     "cpus": "1",
-    "iso_checksum": "992f046c3fb5afecaf8734126f2a095f437ca9b8",
+    "iso_checksum": "91a195bf1395694151fc3f7f766e9d1233e2aed9",
     "iso_checksum_type": "sha1",
-    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2016.03.01/archlinux-2016.03.01-dual.iso",
+    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2017.05.01/archlinux-2017.05.01-x86_64.iso",
     "memory": "1024"
   }
 }
