@@ -80,6 +80,7 @@
         "scripts/php.sh",
         "scripts/mariadb.sh",
         "scripts/phantomjs.sh",
+        "scripts/rabbitmq.sh",
         "scripts/named.sh",
         "scripts/asd.sh",
         "scripts/stat.sh",
