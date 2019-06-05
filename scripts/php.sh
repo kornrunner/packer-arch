@@ -5,12 +5,9 @@ chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
 
-/usr/bin/runuser -l vagrant -c '/usr/bin/yaourt -S --noconfirm php php-apcu php-apcu-bc php-fpm php-gd php-imap php-mcrypt php-tidy php-memcached php-pear php-phalcon php-uopz-git'
+/usr/bin/runuser -l vagrant -c '/usr/bin/yay -S --noconfirm php php-apcu php-apcu-bc php-fpm php-gd php-imagick php-imap php-tidy php-memcached php-mongodb php-phalcon php-phpdbg php-phpiredis-git phpredis-git php-ssh-git php-tidy php-uopz-git'
 sync
 
-/usr/bin/pecl channel-update pecl.php.net
-/usr/bin/pecl install mongodb
-/usr/bin/pecl install redis
 /usr/bin/systemctl enable php-fpm.service
 
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/php.ini

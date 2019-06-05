@@ -2,7 +2,7 @@
 
 # PACMAN_REFLECTOR_ARGS can be used to pick a suitable mirror for pacman
 if [ -z "$PACMAN_REFLECTOR_ARGS" ]; then
-  export PACMAN_REFLECTOR_ARGS='--verbose -l 100 -p http --sort rate --save /etc/pacman.d/mirrorlist'
+  export PACMAN_REFLECTOR_ARGS='-l 100 -p https --sort rate --save /etc/pacman.d/mirrorlist'
 fi
 
 /usr/bin/pacman -S --noconfirm reflector

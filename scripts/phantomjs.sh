@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-/usr/bin/pacman -S --noconfirm phantomjs
+/usr/bin/runuser -l vagrant -c '/usr/bin/yay -S --noconfirm phantomjs-bin'

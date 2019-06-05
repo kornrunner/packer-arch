@@ -12,7 +12,7 @@ Provisioned stuff:
 - scripts/nginx.sh: `nginx` + enable service
 - scripts/memcached.sh: `memcached` + enable service
 - scripts/redis.sh: `redis` + enable service
-- scripts/mongo.sh: `mongodb`, `mongodb-tools` + enable service
+- scripts/mongo.sh: `mongodb` + enable service
 - scripts/supervisord.sh: `supervisord`
 - scripts/nodejs.sh: `nodejs`, `npm`, `bower`, `gulp`, `browserify`
 - scripts/php.sh: `php`, `php-apcu`, `php-apcu-bc`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-phalcon`, `composer` + enable `php-fpm` service, enable extensions
@@ -25,7 +25,7 @@ Provisioned stuff:
 - scripts/vagrant.sh: creates `vagrant` user, adds Vagrant key, changes shell to `zsh` + `oh-my-zsh`
 - scripts/stat.sh: `lsof`, `iotop`, `libstatgrab`
 - scripts/pacman.sh: adds uses `reflector` to sort mirrorlist
-- scripts/yaourt.sh: adds `archlinuxfr` repo and installs `yaourt` (AUR)
+- scripts/yay.sh: installs `yay` (AUR)
 
 PHP Modules
 ```

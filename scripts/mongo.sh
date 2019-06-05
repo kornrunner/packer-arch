@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-/usr/bin/pacman -S --noconfirm mongodb mongodb-tools
+/usr/bin/runuser -l vagrant -c '/usr/bin/yay -S --noconfirm mongodb-bin'
 sync
 /usr/bin/systemctl enable mongodb.service
