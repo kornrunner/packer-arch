@@ -5,7 +5,7 @@ chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
 
-/usr/bin/runuser -l vagrant -c '/usr/bin/yay -S --noconfirm php php-apcu php-apcu-bc php-fpm php-gd php-imagick php-imap php-tidy php-memcached php-mongodb php-phalcon php-phpdbg php-phpiredis-git phpredis-git php-ssh-git php-tidy php-uopz-git phpmd'
+/usr/bin/runuser -l vagrant -c '/usr/bin/yay -S --noconfirm php php-apcu php-apcu-bc php-fpm php-gd php-imagick php-imap php-tidy php-memcached php-mongodb php-phalcon php-phpdbg php-phpiredis-git phpredis-git php-ssh-git php-tidy php-uopz-git'
 sync
 
 /usr/bin/systemctl enable php-fpm.service
