@@ -15,17 +15,17 @@ Provisioned stuff:
 - scripts/mongo.sh: `mongodb` + enable service
 - scripts/supervisord.sh: `supervisord`
 - scripts/nodejs.sh: `nodejs`, `npm`, `bower`, `gulp`, `browserify`
-- scripts/php.sh: `php`, `php-apcu`, `php-apcu-bc`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-phalcon`, `composer` + enable `php-fpm` service, enable extensions
+- scripts/php.sh: `php`, `php-apcu`, `php-apcu-bc`, `php-fpm`, `php-gd`, `php-imap`, `php-mcrypt`, `php-tidy`, `php-memcached`, `php-phalcon`, `composer`, `phpmd` + enable `php-fpm` service, enable extensions
 - scripts/mysql.sh: installs `mariadb`, `mariadb-clients`, `libmariadbclient`
 - scripts/phantomjs.sh: `phantomjs`
 - scripts/rabbitmq.sh: `rabbitmq`
 - scripts/named.sh: `bind`, `bind-tools` + enable `named` service
 - scripts/asd.sh: `anything-sync-daemon`
-- scripts/tools.sh: `htop`, `ack`, `reptyr`, `colordiff`, `mc`, `pv`, `screen`, `gawk`
+- scripts/tools.sh: `htop`, `ack`, `reptyr`, `mc`, `pv`, `screen`, `gawk`
 - scripts/zsh.sh: installs `zsh`, `oh-my-zsh`
 - scripts/vagrant.sh: creates `vagrant` user, adds Vagrant key, changes shell to `zsh` + `oh-my-zsh`
 - scripts/stat.sh: `lsof`, `iotop`, `libstatgrab`
-- scripts/pacman.sh: adds uses `reflector` to sort mirrorlist
+- scripts/pacman.sh: uses `reflector` to sort mirrorlist
 - scripts/yay.sh: installs `yay` (AUR)
 
 PHP Modules
