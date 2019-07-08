@@ -3,7 +3,7 @@
 /usr/bin/pacman -Sy --noconfirm mariadb mariadb-clients libmariadbclient expect
 sync
 
-sed '/\[mysqld\]/a collation-server = utf8_unicode_ci\
+sed '/\[mariadb\]/a collation-server = utf8_unicode_ci\
 character-set-server = utf8\
 skip_name_resolve\
 innodb_file_per_table\
@@ -14,8 +14,8 @@ innodb_log_file_size = 64M\
 innodb_flush_method = O_DIRECT_NO_FSYNC\
 innodb_flush_log_at_trx_commit = 2\
 thread_cache_size = 4\
-bind-address = 0.0.0.0' -i /etc/mysql/my.cnf
-sed "s/sql_mode=/sql_mode=NO_ENGINE_SUBSTITUTION #/" -i /etc/mysql/my.cnf
+bind-address = 0.0.0.0' -i /etc/my.cnf.d/server.cnf
+sed "s/sql_mode=/sql_mode=NO_ENGINE_SUBSTITUTION #/" -i /etc/my.cnf.d/server.cnf
 sync
 
 /usr/bin/mysql_install_db --user="mysql" --basedir=/usr --datadir=/var/lib/mysql

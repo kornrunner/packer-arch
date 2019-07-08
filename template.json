@@ -96,9 +96,9 @@
   },
   "variables": {
     "cpus": "1",
-    "iso_checksum": "53117ee010363388c114cf29e8a7154003854b76",
+    "iso_checksum": "f4d5fe8d7da2fca505c49b86b4e76d3392d90d13",
     "iso_checksum_type": "sha1",
-    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2019.06.01/archlinux-2019.06.01-x86_64.iso",
+    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2019.07.01/archlinux-2019.07.01-x86_64.iso",
     "memory": "1024"
   }
 }
